@@ -33,10 +33,10 @@ module.exports = {
         parent_id: {
           type: Sequelize.BIGINT,
           allowNull: true,
-          references: {
-            model: "comments",
-            key: "id",
-          },
+          // references: {
+          //   model: "comments",
+          //   key: "id",
+          // },
         },
         created_at: {
           type: Sequelize.DATE,
