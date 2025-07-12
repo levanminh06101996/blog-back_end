@@ -6,36 +6,30 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      post_id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-          model: "posts",
-          key: "id",
-        },
+      likes_count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
-      parent_id: {
-        type: DataTypes.BIGINT,
-        allowNull: true,
-        references: {
-          model: "comments",
-          key: "id",
-        },
+      deleted_at: {
+        type: DataTypes.DATE,
+        defaultValue: null,
       },
     },
     {
       tableName: "comments",
-      timestamps: true,
       underscored: true,
-      charset: "utf8",
-      collate: "utf8_general_ci",
-      engine: "InnoDB",
-      createdAt: "created_at",
-      updatedAt: "updated_at",
+      timestamps: true,
     }
   );
+
   Comment.associate = (db) => {
-    Comment.belongsTo(db.Post);
+    Comment.belongsTo(db.User, {
+      as: "user",
+    });
+    Comment.belongsTo(db.Post, {
+      as: "post",
+    });
   };
+
   return Comment;
 };

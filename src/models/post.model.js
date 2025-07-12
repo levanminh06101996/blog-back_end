@@ -3,46 +3,68 @@ module.exports = (sequelize, DataTypes) => {
     "Post",
     {
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        defaultValue: null,
+      },
+      meta_title: {
+        type: DataTypes.STRING(255),
+        defaultValue: null,
+      },
+      meta_description: {
+        type: DataTypes.TEXT,
+        defaultValue: null,
+      },
+      slug: {
+        type: DataTypes.STRING(255),
+        unique: true,
+        allowNull: false,
+      },
+      thumbnail: {
+        type: DataTypes.STRING(255),
+        defaultValue: null,
+      },
+      cover: {
+        type: DataTypes.STRING(255),
+        defaultValue: null,
       },
       content: {
         type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      slug: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        defaultValue: null,
       },
       status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "active",
+        type: DataTypes.STRING(50),
+        defaultValue: "draft",
       },
-      topic_id: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-          model: "topics",
-          key: "id",
-        },
+      visibility: {
+        type: DataTypes.STRING(50),
+        defaultValue: "public",
+      },
+      views_count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      likes_count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
     },
     {
       tableName: "posts",
       timestamps: true,
       underscored: true,
-      charset: "utf8",
-      collate: "utf8_general_ci",
-      engine: "InnoDB",
-      createdAt: "created_at",
-      updatedAt: "updated_at",
     }
   );
+  // Post.associate = (db) => {
+  //   Post.hasMany(db.Comment);
+  //   Post.belongsTo(db.Topic);
+  // };
+
   Post.associate = (db) => {
-    Post.hasMany(db.Comment);
-    Post.belongsTo(db.Topic);
+    post,
   };
   return Post;
 };

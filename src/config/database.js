@@ -4,7 +4,7 @@ module.exports = {
   development: {
     username: "admin",
     password: "123456",
-    database: "torano_dev",
+    database: "blog_Project",
     host: "127.0.0.1",
     port: 3306,
     dialect: "mysql",

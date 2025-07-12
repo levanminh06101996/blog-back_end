@@ -2,19 +2,32 @@ module.exports = (sequelize, DataTypes) => {
   const Topic = sequelize.define(
     "Topic",
     {
-      topic_name: {
-        type: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING(100),
         allowNull: false,
+      },
+      slug: {
+        type: DataTypes.STRING(255),
         unique: true,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING(255),
+        defaultValue: null,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        defaultValue: null,
+      },
+      posts_count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
     },
     {
-      tableName: "topics",
+      table: "topics",
+      timestamp: true,
       underscored: true,
-      charset: "utf8",
-      collate: "utf8_general_ci",
-      engine: "InnoDB",
-      timestamps: false,
     }
   );
   Topic.associate = (db) => {
