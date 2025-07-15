@@ -26,5 +26,5 @@ app.use(notFoundHandler);
 app.use(errorsHandler);
 
 app.listen(3000, () => {
-  console.log("hello");
+  console.log("Hello");
 });

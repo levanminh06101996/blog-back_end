@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xác thực Email</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      .icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .icon svg {
+        width: 40px;
+        height: 40px;
+        fill: white;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 30px;
+        line-height: 1.5;
+      }
+
+      .email-display {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 30px;
+        border-left: 4px solid #667eea;
+      }
+
+      .email-display strong {
+        color: #333;
+        font-size: 18px;
+      }
+
+      .verification-form {
+        margin-bottom: 30px;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        text-align: center;
+        letter-spacing: 2px;
+        font-weight: 600;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .resend-section {
+        padding: 20px 0;
+        border-top: 1px solid #e1e5e9;
+        margin-top: 20px;
+      }
+
+      .resend-text {
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .back-link {
+        display: inline-block;
+        color: #667eea;
+        text-decoration: none;
+        margin-top: 20px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #764ba2;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+          />
+        </svg>
+      </div>
+
+      <h1>Xác thực Email</h1>
+      <h2><%= verifyUrl %></h2>
+      <p class="subtitle">
+        Chúng tôi đã gửi mã xác thực đến email của bạn.<br />
+        Vui lòng kiểm tra hộp thư và nhập mã để hoàn tất đăng ký.
+      </p>
+
+      <div class="email-display">
+        <strong>user@example.com</strong>
+      </div>
+
+      <form class="verification-form">
+        <div class="input-group">
+          <label for="verificationCode">Mã xác thực (6 chữ số)</label>
+          <input
+            type="text"
+            id="verificationCode"
+            name="verificationCode"
+            placeholder="000000"
+            maxlength="6"
+          />
+        </div>
+
+        <button type="submit" class="btn">Xác thực Email</button>
+      </form>
+
+      <div class="resend-section">
+        <p class="resend-text">Không nhận được mã?</p>
+
+        <button class="btn btn-secondary">Gửi lại mã xác thực</button>
+      </div>
+
+      <a href="#" class="back-link"> ← Quay lại đăng nhập </a>
+    </div>
+  </body>
+</html>

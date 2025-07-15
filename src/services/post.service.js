@@ -8,7 +8,6 @@ class PostsService {
     const offset = (page - 1) * limit;
 
     const { rows: items, count: total } = await Post.findAndCountAll({
-      include: [Topic, Comment],
       limit,
       offset,
       order: [["created_at", "DESC"]],

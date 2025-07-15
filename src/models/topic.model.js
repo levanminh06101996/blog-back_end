@@ -30,8 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  Topic.associate = (db) => {
-    Topic.hasMany(db.Post);
-  };
+  Topic.associate = (db) => {};
   return Topic;
 };

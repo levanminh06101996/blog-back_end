@@ -2,6 +2,18 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "Post",
     {
+      user_id: {
+        type: DataTypes.INTEGER({
+          unsigned: true,
+        }),
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       title: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -58,13 +70,11 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  // Post.associate = (db) => {
-  //   Post.hasMany(db.Comment);
-  //   Post.belongsTo(db.Topic);
-  // };
 
   Post.associate = (db) => {
-    post,
+    Post.belongsTo(db.User, {
+      as: "user",
+    });
   };
   return Post;
 };
