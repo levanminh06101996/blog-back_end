@@ -8,17 +8,17 @@ const { Op } = require("sequelize");
  * @returns {string} Unique refresh token
  */
 const generateUniqueToken = async () => {
-    let randToken = null;
-    do {
-        randToken = generateToken();
-    } while (
-        await RefreshToken.findOne({
-            where: {
-                token: randToken,
-            },
-        })
-    );
-    return randToken;
+  let randToken = null;
+  do {
+    randToken = generateToken();
+  } while (
+    await RefreshToken.findOne({
+      where: {
+        token: randToken,
+      },
+    })
+  );
+  return randToken;
 };
 
 /**
@@ -27,18 +27,20 @@ const generateUniqueToken = async () => {
  * @returns {Object} RefreshToken instance
  */
 const createRefreshToken = async (userId) => {
-    const token = await generateUniqueToken();
+  const token = await generateUniqueToken();
 
-    const current = new Date();
-    const expiredAt = new Date(
-        current.getTime() + REFRESH_TOKEN_EXPIRES_IN * 1000
-    );
-
-    return await RefreshToken.create({
-        user_id: userId,
-        token: token,
-        expired_at: expiredAt,
-    });
+  const current = new Date();
+  const expiredAt = new Date(
+    current.getTime() + REFRESH_TOKEN_EXPIRES_IN * 1000
+  );
+  console.log("user:", userId);
+  console.log(token);
+  console.log(expiredAt);
+  return await RefreshToken.create({
+    user_id: userId,
+    token: token,
+    expired_at: expiredAt,
+  });
 };
 
 /**
@@ -47,14 +49,14 @@ const createRefreshToken = async (userId) => {
  * @returns {Object|null} RefreshToken instance or null
  */
 const findValidRefreshToken = async (token) => {
-    return await RefreshToken.findOne({
-        where: {
-            token: token,
-            expired_at: {
-                [Op.gte]: Date.now(),
-            },
-        },
-    });
+  return await RefreshToken.findOne({
+    where: {
+      token: token,
+      expired_at: {
+        [Op.gte]: Date.now(),
+      },
+    },
+  });
 };
 
 /**
@@ -62,11 +64,11 @@ const findValidRefreshToken = async (token) => {
  * @param {Object} refreshToken - RefreshToken instance
  */
 const deleteRefreshToken = async (refreshToken) => {
-    await refreshToken.destroy();
+  await refreshToken.destroy();
 };
 
 module.exports = {
-    createRefreshToken,
-    findValidRefreshToken,
-    deleteRefreshToken,
+  createRefreshToken,
+  findValidRefreshToken,
+  deleteRefreshToken,
 };

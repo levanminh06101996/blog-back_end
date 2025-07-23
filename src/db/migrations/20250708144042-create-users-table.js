@@ -25,6 +25,10 @@ module.exports = {
         unique: true,
         defaultValue: null,
       },
+      verified_at: {
+        type: Sequelize.DATE,
+        defaultValue: null,
+      },
       password: {
         type: Sequelize.STRING(255),
         defaultValue: null,
@@ -90,15 +94,22 @@ module.exports = {
         type: Sequelize.STRING(255),
         defaultValue: null,
       },
+      reset_token: {
+        type: Sequelize.STRING(255),
+        defaultValue: null,
+      },
+
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
+        defaultValue: Sequelize.literal(
+          "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+        ),
       },
     });
   },

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", postsController.index);
 router.get("/:key", postsController.show);
-router.post("/", postsController.store);
+router.post("/create", postsController.store);
 router.put("/:key", postsController.update);
 router.patch("/:key", postsController.update);
 router.delete("/:key", postsController.destroy);

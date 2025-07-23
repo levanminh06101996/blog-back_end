@@ -75,6 +75,12 @@ module.exports = (sequelize, DataTypes) => {
     Post.belongsTo(db.User, {
       as: "user",
     });
+    Post.belongsToMany(db.Topic, {
+      as: "topics",
+      through: "post_topic",
+      foreignKey: "post_id",
+      otherKey: "topic_id",
+    });
   };
   return Post;
 };

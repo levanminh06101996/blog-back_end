@@ -3,7 +3,7 @@ const ejs = require("ejs");
 
 async function loadEmail(template, data) {
   const emailPath = path.join(__dirname, "..", "emails", `${template}.ejs`);
-  const html = ejs.renderFile(emailPath, data);
+  const html = await ejs.renderFile(emailPath, data);
   return html;
 }
 

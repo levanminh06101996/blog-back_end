@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         defaultValue: null,
       },
+      verified_at: {
+        type: DataTypes.DATE,
+        defaultValue: null,
+      },
       password: {
         type: DataTypes.STRING(255),
         defaultValue: null,
@@ -78,6 +82,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       linkedin_url: {
         type: DataTypes.STRING(255),
+        defaultValue: null,
+      },
+      verified_at: {
+        type: DataTypes.DATE,
         defaultValue: null,
       },
     },

@@ -4,9 +4,13 @@ const { where, Op } = require("sequelize");
 class TopicsService {
   async getAll(page, limit) {
     const offset = (page - 1) * limit;
-
     const { rows: items, count: total } = await Topic.findAndCountAll({
-      include: Post,
+      include: [
+        {
+          model: Post,
+          as: "posts", // Alias từ model Topic
+        },
+      ],
       limit,
       offset,
     });

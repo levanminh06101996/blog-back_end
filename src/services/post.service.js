@@ -26,12 +26,23 @@ class PostsService {
   }
 
   async create(data) {
+    console.log("data ", data);
     const toSlug = (title) => {
       return `${slugify(title, { lower: true, strict: true })}-${nanoid(6)}`;
     };
     data.slug = toSlug(data.title);
-    const post = await Post.create(data);
-    return post;
+
+    // const post = await Post.create(data);
+    const topic = await Topic.findByPk(data.topic_id);
+    if (!topic) {
+      return res.status(404).json({ message: "Topic not found" });
+    }
+    const createdPost = await Post.create(data, { returning: true });
+    await topic.addPost(createdPost.id);
+    return {
+      message: "Posts created and linked to topic successfully",
+      data: createdPost,
+    };
   }
 
   async update(key, data) {

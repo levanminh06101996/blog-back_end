@@ -88,23 +88,23 @@
         line-height: 1.5;
       }
 
-      .email-display {
+      /* .email-display {
         background: #f8f9fa;
         border-radius: 10px;
         padding: 15px;
         margin-bottom: 30px;
         border-left: 4px solid #667eea;
-      }
+      } */
 
-      .email-display strong {
+      /* .email-display strong {
         color: #333;
         font-size: 18px;
-      }
+      } */
 
-      .verification-form {
+      /* .verification-form {
         margin-bottom: 30px;
-      }
-
+      } */
+      /* 
       .input-group {
         margin-bottom: 20px;
         text-align: left;
@@ -127,13 +127,13 @@
         text-align: center;
         letter-spacing: 2px;
         font-weight: 600;
-      }
+      } */
 
-      .input-group input:focus {
+      /* .input-group input:focus {
         outline: none;
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-      }
+      } */
 
       .btn {
         background: linear-gradient(135deg, #667eea, #764ba2);
@@ -146,17 +146,17 @@
         cursor: pointer;
         transition: all 0.3s ease;
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 35px;
       }
 
-      .btn:hover {
+      /* .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
       }
 
       .btn:active {
         transform: translateY(0);
-      }
+      } */
 
       .resend-section {
         padding: 20px 0;
@@ -192,6 +192,13 @@
       .back-link:hover {
         color: #764ba2;
       }
+      h2 {
+        margin-bottom: 40px;
+        margin-top: 20px;
+      }
+      p {
+        margin-top: 40px;
+      }
 
       @media (max-width: 600px) {
         .container {
@@ -215,38 +222,12 @@
       </div>
 
       <h1>Xác thực Email</h1>
-      <h2><%= verifyUrl %></h2>
+      <h2>Ấn vào Link bên dưới để đăng kí</h2>
+      <a href="<%= verifyUrl %>" class="btn">Xác thực ngay</a>
       <p class="subtitle">
         Chúng tôi đã gửi mã xác thực đến email của bạn.<br />
         Vui lòng kiểm tra hộp thư và nhập mã để hoàn tất đăng ký.
       </p>
-
-      <div class="email-display">
-        <strong>user@example.com</strong>
-      </div>
-
-      <form class="verification-form">
-        <div class="input-group">
-          <label for="verificationCode">Mã xác thực (6 chữ số)</label>
-          <input
-            type="text"
-            id="verificationCode"
-            name="verificationCode"
-            placeholder="000000"
-            maxlength="6"
-          />
-        </div>
-
-        <button type="submit" class="btn">Xác thực Email</button>
-      </form>
-
-      <div class="resend-section">
-        <p class="resend-text">Không nhận được mã?</p>
-
-        <button class="btn btn-secondary">Gửi lại mã xác thực</button>
-      </div>
-
-      <a href="#" class="back-link"> ← Quay lại đăng nhập </a>
     </div>
   </body>
 </html>

@@ -25,11 +25,18 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      table: "topics",
-      timestamp: true,
+      tableName: "topics",
+      timestamps: true,
       underscored: true,
     }
   );
-  Topic.associate = (db) => {};
+  Topic.associate = (db) => {
+    Topic.belongsToMany(db.Post, {
+      as: "posts",
+      through: "post_topic",
+      foreignKey: "topic_id",
+      otherKey: "post_id",
+    });
+  };
   return Topic;
 };
