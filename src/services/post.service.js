@@ -1,4 +1,4 @@
-const { Post, Topic, Comment } = require("@/models/index");
+const { Post, Topic, Comment, User } = require("@/models/index");
 const { nanoid } = require("nanoid");
 const { where, Op } = require("sequelize");
 const { default: slugify } = require("slugify");
@@ -11,6 +11,7 @@ class PostsService {
       limit,
       offset,
       order: [["created_at", "DESC"]],
+      include: "user",
     });
 
     return { items, total };

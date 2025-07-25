@@ -9,7 +9,11 @@ class UsersService {
   }
 
   async getById(id) {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findOne({ where: { id }, include: "post" });
+    return user;
+  }
+  async getByUsername(username) {
+    const user = await User.findOne({ where: { username }, include: "post" });
     return user;
   }
 

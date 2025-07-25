@@ -6,6 +6,7 @@ const loadEmail = require("../utils/loadEmail");
 const transporter = require("../config/mailer");
 const userService = require("./user.service");
 const { RESET_TOKEN_EXPIRES_IN } = require("../config/auth");
+const { Post } = require("../models/index");
 /**
  * Register new user
  * @param {string} email - User email

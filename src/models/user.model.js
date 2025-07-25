@@ -111,6 +111,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "following_id",
     });
     User.hasMany(db.Post, {
+      foreignKey: "user_id",
       as: "post",
     });
   };

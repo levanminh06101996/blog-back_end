@@ -1,5 +1,5 @@
 const response = require("@/utils/response");
-const { User } = require("@/models");
+const { User, Post } = require("@/models");
 const jwtService = require("@/services/jwt.service");
 
 async function checkAuth(req, res, next) {
@@ -12,8 +12,9 @@ async function checkAuth(req, res, next) {
     const payload = jwtService.verifyAccessToken(token);
 
     const user = await User.findOne({
-      attributes: ["id", "email", "created_at"],
+      // attributes: ["id", "email", "created_at"],
       where: { id: payload.userId },
+      include: "post",
     });
 
     if (!user) {

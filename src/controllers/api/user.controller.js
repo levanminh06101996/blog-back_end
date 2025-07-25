@@ -35,6 +35,11 @@ const show = async (req, res) => {
   if (!user) throwError(404, "not Found");
   response.success(res, 201, user);
 };
+const showUsername = async (req, res) => {
+  const user = await usersService.getByUsername(req.params.username);
+  if (!user) throwError(404, "not Found");
+  response.success(res, 201, user);
+};
 
 const create = async (req, res) => {
   const user = await usersService.create(req.body);
@@ -52,4 +57,12 @@ const destroy = async (req, res) => {
   response.success(res, 204);
 };
 
-module.exports = { getList, index, show, create, update, destroy };
+module.exports = {
+  getList,
+  index,
+  show,
+  create,
+  update,
+  destroy,
+  showUsername,
+};
