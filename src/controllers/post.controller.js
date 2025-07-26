@@ -16,6 +16,12 @@ const show = async (req, res) => {
   response.success(res, 200, post);
 };
 
+const showPostBySlug = async (req, res) => {
+  const post = await postsService.getBySlug(req.params.slug);
+  if (!post) throwError(404, "Not Found");
+  response.success(res, 200, post);
+};
+
 const store = async (req, res) => {
   const post = await postsService.create(req.body);
   response.success(res, 201, post);
@@ -37,4 +43,4 @@ const destroy = async (req, res) => {
   response.success(res, 204);
 };
 
-module.exports = { show, index, store, update, destroy };
+module.exports = { show, index, store, update, destroy, showPostBySlug };

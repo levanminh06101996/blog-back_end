@@ -1,5 +1,5 @@
 const { User, Post } = require("../models/index");
-const { where, op, row, count } = require("sequelize");
+const { where, op, row, count, Model } = require("sequelize");
 
 class UsersService {
   async getAll() {
@@ -13,7 +13,16 @@ class UsersService {
     return user;
   }
   async getByUsername(username) {
-    const user = await User.findOne({ where: { username }, include: "post" });
+    const user = await User.findOne({
+      where: { username },
+      include: [
+        {
+          model: Post,
+          as: "post",
+          include: [{ model: User, as: "user" }],
+        },
+      ],
+    });
     return user;
   }
 

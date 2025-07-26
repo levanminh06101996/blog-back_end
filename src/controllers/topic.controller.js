@@ -9,6 +9,48 @@ const index = async (req, res) => {
   res.paginate({ items, total });
 };
 
+const indexTopicsTrending = async (req, res) => {
+  const { limit } = req;
+  const { items, total } = await topicsService.getTopicsCount(limit);
+  res.paginate({ items, total });
+};
+
+const indexFeaturedArticles = async (req, res) => {
+  const { limit } = req.query;
+  const featuredArticles = await topicsService.getFeaturedArticles(limit);
+
+  const filteredArticles = featuredArticles.map((article) => {
+    if (article && article.topics && article.topics.length > 0) {
+      const randomTopic =
+        article.topics[Math.floor(Math.random() * article.topics.length)];
+      return {
+        ...article.toJSON(),
+        topics: [randomTopic],
+      };
+    }
+    return article;
+  });
+  response.success(res, 201, filteredArticles);
+};
+
+const indexGetLatestPost = async (req, res) => {
+  const { limit } = req.query;
+  const latestPosts = await topicsService.getLatestPosts(limit);
+
+  const filterLatestPosts = latestPosts.map((post) => {
+    if (post && post.topics && post.topics.length > 0) {
+      const randomTopic =
+        post.topics[Math.floor(Math.random() * post.topics.length)];
+      return {
+        ...post.toJSON(),
+        topics: [randomTopic],
+      };
+    }
+    return post;
+  });
+  response.success(res, 201, filterLatestPosts);
+};
+
 const show = async (req, res) => {
   const topic_name = req.params.topic_name;
   const topic = await topicsService.getById(topic_name);
@@ -39,4 +81,13 @@ const destroy = async (req, res) => {
   response.success(res, 204);
 };
 
-module.exports = { show, index, store, update, destroy };
+module.exports = {
+  show,
+  index,
+  store,
+  update,
+  destroy,
+  indexTopicsTrending,
+  indexFeaturedArticles,
+  indexGetLatestPost,
+};

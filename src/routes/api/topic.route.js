@@ -9,5 +9,7 @@ router.post("/create", topicsController.store);
 router.put("/:topic_name", topicsController.update);
 router.patch("/:topic_name", topicsController.update);
 router.delete("/:topic_name", topicsController.destroy);
-
+router.get("/topics/topicTrending", topicsController.indexTopicsTrending);
+router.get("/topics/featured", topicsController.indexFeaturedArticles);
+router.get("/topics/latest", topicsController.indexGetLatestPost);
 module.exports = router;

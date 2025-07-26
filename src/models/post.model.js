@@ -74,6 +74,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.associate = (db) => {
     Post.belongsTo(db.User, {
       as: "user",
+      foreignKey: "user_id",
     });
     Post.belongsToMany(db.Topic, {
       as: "topics",

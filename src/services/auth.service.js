@@ -145,15 +145,6 @@ const forgotPassword = async (email) => {
     throw new Error("Gửi email thất bại: " + error.message);
   }
 };
-//   await transporter.sendMail({
-//     from: '"MinhBe" <minhlvf8196@fullstack.edu.vn>',
-//     to: email,
-//     subject: "Đặt lại mật khẩu ✔",
-//     html: template,
-//   });
-//   console.log("Email sent to:", email);
-//   return { message: "Email đặt lại mật khẩu đã được gửi" };
-// };
 
 const resetPassword = async (token, newPassword) => {
   try {
@@ -161,8 +152,6 @@ const resetPassword = async (token, newPassword) => {
     const user = await User.findOne({
       where: {
         id: decoded.userId,
-        // reset_token: token,
-        // reset_token_expires: { [Op.gt]: new Date() },
       },
     });
     console.log("user: ", user);

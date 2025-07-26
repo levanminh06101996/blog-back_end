@@ -21,8 +21,13 @@ class PostsService {
     const isId = /^\d+$/.test(key);
     const post = await Post.findOne({
       where: isId ? { id: key } : { slug: key },
-      include: [Topic, Comment],
+      include: [Topic, Comment, User],
     });
+    return post;
+  }
+
+  async getBySlug(slug) {
+    const post = await Post.findOne({ where: { slug }, include: "user" });
     return post;
   }
 
@@ -33,7 +38,6 @@ class PostsService {
     };
     data.slug = toSlug(data.title);
 
-    // const post = await Post.create(data);
     const topic = await Topic.findByPk(data.topic_id);
     if (!topic) {
       return res.status(404).json({ message: "Topic not found" });

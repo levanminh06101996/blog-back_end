@@ -111,8 +111,13 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "following_id",
     });
     User.hasMany(db.Post, {
-      foreignKey: "user_id",
       as: "post",
+    });
+    User.belongsToMany(db.Topic, {
+      as: "topics",
+      through: "user_topic",
+      foreignKey: "user_id",
+      otherKey: "topic_id",
     });
   };
 
